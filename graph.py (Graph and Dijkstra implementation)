@@ -1,1 +1,55 @@
+import heapq
 
+class Graph:
+    def __init__(self):
+        # adjacency list: {node: [(neighbor, weight), ...]}
+        self.adj_list = {}
+
+    def add_edge(self, u, v, weight):
+        """Add a directed edge u -> v with given weight."""
+        if u not in self.adj_list:
+            self.adj_list[u] = []
+        self.adj_list[u].append((v, weight))
+
+    def dijkstra(self, start):
+        """Compute shortest paths from start node to all others."""
+        # distances dictionary
+        distances = {node: float('inf') for node in self.adj_list}
+        distances[start] = 0
+
+        # priority queue: (distance, node)
+        pq = [(0, start)]
+
+        while pq:
+            current_dist, current_node = heapq.heappop(pq)
+
+            # Skip if we already found a shorter path
+            if current_dist > distances[current_node]:
+                continue
+
+            for neighbor, weight in self.adj_list.get(current_node, []):
+                distance = current_dist + weight
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(pq, (distance, neighbor))
+
+        return distances
+
+
+# Example usage
+if __name__ == "__main__":
+    g = Graph()
+    g.add_edge("A", "B", 4)
+    g.add_edge("A", "C", 2)
+    g.add_edge("B", "C", 5)
+    g.add_edge("B", "D", 10)
+    g.add_edge("C", "E", 3)
+    g.add_edge("E", "D", 4)
+    g.add_edge("D", "F", 11)
+
+    start_node = "A"
+    shortest_paths = g.dijkstra(start_node)
+
+    print(f"Shortest paths from {start_node}:")
+    for node, dist in shortest_paths.items():
+        print(f"  {node}: {dist}")
