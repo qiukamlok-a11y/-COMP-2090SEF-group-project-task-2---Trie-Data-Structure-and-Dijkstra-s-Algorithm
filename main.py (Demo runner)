@@ -1,1 +1,43 @@
+# main.py
+from trie import Trie
+from dijkstra import Graph
 
+def demo_trie():
+    print("=== Trie Data Structure Demo ===")
+    trie = Trie()
+    trie.insert("apple")
+    trie.insert("app")
+    trie.insert("bat")
+
+    print("search('apple'):", trie.search("apple"))   # True
+    print("search('app'):", trie.search("app"))       # True
+    print("search('appl'):", trie.search("appl"))     # False
+    print("starts_with('ap'):", trie.starts_with("ap"))  # True
+    print("starts_with('ba'):", trie.starts_with("ba"))  # True
+    print("starts_with('cat'):", trie.starts_with("cat")) # False
+    print()
+
+
+def demo_dijkstra():
+    print("=== Dijkstra’s Algorithm Demo ===")
+    g = Graph()
+    g.add_edge("A", "B", 4)
+    g.add_edge("A", "C", 2)
+    g.add_edge("B", "C", 5)
+    g.add_edge("B", "D", 10)
+    g.add_edge("C", "E", 3)
+    g.add_edge("E", "D", 4)
+    g.add_edge("D", "F", 11)
+
+    start_node = "A"
+    shortest_paths = g.dijkstra(start_node)
+
+    print(f"Shortest paths from {start_node}:")
+    for node, dist in shortest_paths.items():
+        print(f"  {node}: {dist}")
+    print()
+
+
+if __name__ == "__main__":
+    demo_trie()
+    demo_dijkstra()
