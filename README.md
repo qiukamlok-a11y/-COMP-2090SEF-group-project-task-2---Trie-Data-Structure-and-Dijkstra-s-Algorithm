@@ -1,5 +1,5 @@
 # -COMP-2090SEF-group-project-task-2
-Our purpose is to learn about Trie-Data-Structure and Dijkstra-s-Algorithm
+Our project shows how object‑oriented programming can solve real problems. We use a Trie for quick prefix searches and Dijkstra’s Algorithm for finding shortest paths in graphs. Together, they demonstrate how principles like encapsulation, abstraction, and modularity make Python code clear, reusable, and scalable.
 
 ##User Guide – Trie Data Structure (Python)##
 1. Prerequisites
